@@ -243,3 +243,15 @@ terraform apply
 
 ![Terraform Apply](./images/terraform-apply-1.JPG)
 
+Infrastructure successfully created
+
+![Terraform Apply](./images/vpc1.JPG)
+
+VPC created successfully
+
+![Terraform Apply](./images/subnets1.JPG)
+
+### Subnets created successfully
+---
+## Phase 1 of Project (VPC, Subnets) Completed
+---
