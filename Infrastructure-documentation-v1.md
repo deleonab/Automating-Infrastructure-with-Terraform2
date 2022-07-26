@@ -2,6 +2,11 @@
 ---
 
 
+### installed the following extentions for Terraform in VSCode
+-- Terraform Configuration
+--Hashicorp Syntax Highlighting
+
+
 
 I created an S3 bucket in the AWS console called dele-dev-terraform-bucket to store the Terraform state file
 
