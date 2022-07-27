@@ -267,5 +267,5 @@ terraform destroy
 
 ![Terraform Destroy](./images/terraform-destroy.JPG)
 ---
-## Phase 1 of Project (VPC, Subnets) Completed
+## Phase 1 of Project (VPC, 2 Public Subnets created) Completed
 ---
