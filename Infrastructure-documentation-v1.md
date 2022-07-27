@@ -257,6 +257,15 @@ VPC created successfully
 ![Terraform Apply](./images/subnets1.JPG)
 
 ### Subnets created successfully
+
+
+### Next was to destroy the Infrastructure
+
+```
+terraform destroy
+```
+
+![Terraform Destroy](./images/terraform-destroy.JPG)
 ---
 ## Phase 1 of Project (VPC, Subnets) Completed
 ---
