@@ -39,3 +39,12 @@ variable "tags" {
   default     = {}
 }
 ```
+### create the site wide default tags to be appended to the distinct tags later
+```
+tags = {
+  Enviroment      = "production" 
+  Owner-Email     = "dele@deleonabowu.io"
+  Managed-By      = "Terraform"
+  Billing-Account = "1234567890"
+}
+```
