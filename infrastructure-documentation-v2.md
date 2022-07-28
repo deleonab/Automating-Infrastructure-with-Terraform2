@@ -82,6 +82,19 @@ tags = merge(
 ```
 
 
+### The next resource to create will be the Internet Gateway
+
+```
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = format("%s-IGW-%s",name.value,vpc.main.id)
+  }
+}
+```
+
+
 
 
 
