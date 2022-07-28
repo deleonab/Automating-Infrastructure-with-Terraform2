@@ -49,7 +49,7 @@ tags = {
 }
 ```
 
-### To tag our resources we can merger the default with the unique
+### To tag our resources we can merge the default tags with the resource name
 ```
 tags = merge(
     var.tags,
