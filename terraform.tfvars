@@ -22,3 +22,4 @@ tags = {
 }
 
 name = "Terraform"
+environment = "aws"
