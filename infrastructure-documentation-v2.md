@@ -60,4 +60,29 @@ tags = merge(
   ```
 
  ### We shall use the format function to append the default tags to our resource name
+  ```
   Name = format("%s-%s!", aws_vpc.main.id,resource_name)
+  ```
+
+  ### We also need to ensure that the ip addresses in private and public subnets do not overlap.This we do by adding 2 to count.index for the private subnet cidrsubnet()
+
+  ```
+  cidr_block = cidrsubnet(var.vpc_cidr, 8, count.index + 2)
+  ```
+
+  ```
+  resource "aws_subnet" "private" {
+  count                   = var.preferred_number_of_private_subnets == null ? length(data.aws_availability_zones.available.names) : var.preferred_number_of_private_subnets
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, count.index + 2)
+  map_public_ip_on_launch = true
+ //availability_zone       = data.aws_availability_zones.available.names[count.index]
+ availability_zone = element(data.aws_availability_zones.available.names[*], count.index)
+ }
+```
+
+
+
+
+
+
