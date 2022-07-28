@@ -11,21 +11,21 @@ variable "vpc_cidr" {
 }
 
 variable "enable_dns_support" {
-  default = "true"
+  type = bool
 }
 
 
 variable "enable_dns_hostnames" {
-  default = "true"
+  type = bool
 }
 
 
 variable "enable_classiclink" {
-  default = "false"
+  type = bool
 }
 
 variable "enable_classiclink_dns_support" {
-  default = "false"
+ type = bool
 }
 
 
