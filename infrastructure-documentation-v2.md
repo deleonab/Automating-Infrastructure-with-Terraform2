@@ -128,6 +128,10 @@ resource "aws_nat_gateway" "ngw" {
 }
 ```
 
+### I refactored the code by creating separate files for our gateway resources
+-- internet_gw.tf
+--nat_gw.tf
+
 
 
 
