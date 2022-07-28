@@ -56,6 +56,6 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = format("%s-IGW-%s",name.value,vpc_id)
+    Name = format("%s-IGW-%s",var.name,vpc_id)
   }
 }
