@@ -47,7 +47,7 @@ resource "aws_subnet" "private" {
  tags = merge(
     var.tags,
     {
-      Name = format("%s-%s!", aws_vpc.main.id,"PrivateSubnet")
+      Name = format("%s-PrivateSubnet-%s",var.name,count.index)
     } 
   )
 }
