@@ -44,7 +44,12 @@ resource "aws_subnet" "private" {
   map_public_ip_on_launch = true
  //availability_zone       = data.aws_availability_zones.available.names[count.index]
  availability_zone = element(data.aws_availability_zones.available.names[*], count.index)
- 
+ tags = merge(
+    var.tags,
+    {
+      Name = format("%s-%s!", aws_vpc.main.id,"PrivateSubnet")
+    } 
+  )
 }
 
 
