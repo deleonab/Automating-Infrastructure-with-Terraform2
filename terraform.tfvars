@@ -20,3 +20,5 @@ tags = {
   Managed-By      = "Terraform"
   Billing-Account = "1234567890"
 }
+
+name = "Terraform"
