@@ -48,3 +48,16 @@ tags = {
   Billing-Account = "1234567890"
 }
 ```
+
+### To tag our resources we can merger the default with the unique
+```
+tags = merge(
+    var.tags,
+    {
+      Name = "Name of the resource"
+    },
+  )
+  ```
+
+ ### We shall use the format function to append the default tags to our resource name
+  Name = format("%s-%s!", aws_vpc.main.id,resource_name)
