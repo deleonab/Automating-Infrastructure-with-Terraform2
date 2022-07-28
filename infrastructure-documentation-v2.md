@@ -61,7 +61,7 @@ tags = merge(
 
  ### We shall use the format function to append the default tags to our resource name
   ```
-  Name = format("%s-%s!", aws_vpc.main.id,resource_name)
+  Name = format("%s-PrivateSubnet-%s",var.name,count.index)
   ```
 
   ### We also need to ensure that the ip addresses in private and public subnets do not overlap.This we do by adding 2 to count.index for the private subnet cidrsubnet()
