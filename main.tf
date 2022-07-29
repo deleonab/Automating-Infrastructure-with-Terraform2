@@ -119,16 +119,35 @@ resource "aws_route" "private_rtb_route" {
 
 resource "aws_route_table_association" "private_subnet_association" {
     
-    count = count(aws_subnet.private[*].id)
+    count = length(aws_subnet.private[*].id)
     subnet_id = element(aws_subnet.private[*].id, count.index)
     route_table_id = aws_route.private_rtb_route.id
   }
 
 
 
-
-  resource "aws_route_table" "rtb-public" {
+# create route table for the public subnets
+resource "aws_route_table" "public-rtb" {
   vpc_id = aws_vpc.main.id
 
-  
-  }
+  tags = merge(
+    var.tags,
+    {
+      Name = format("%s-Public-Route-Table", var.name)
+    },
+  )
+}
+
+# create route for the public route table and attach the internet gateway
+resource "aws_route" "public-rtb-route" {
+  route_table_id         = aws_route_table.public-rtb.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.igw.id
+}
+
+# associate all public subnets to the public route table
+resource "aws_route_table_association" "public-subnets-assoc" {
+  count          = length(aws_subnet.public[*].id)
+  subnet_id      = element(aws_subnet.public[*].id, count.index)
+  route_table_id = aws_route_table.public-rtb.id
+}
