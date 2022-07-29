@@ -219,3 +219,25 @@ internet-gw.tf  - The internet gateway
 nat-gw.tf - The nat gateway
 routes.tf   - The private and public route tables, routes and subnet associations
 
+``` 
+terraform plan
+terraform apply
+```
+
+### Build was successful and 20 resources added
+
+![terraform apply](./images/twenty-created.JPG)
+
+### route tables
+![terraform apply](./images/t-route-tables.JPG)
+
+### Subnets
+![terraform apply](./images/t-subnets.JPG)
+
+
+### Internet Gateway
+![terraform apply](./images/t-internet-gateway.JPG)
+
+
+### Nat Gateway
+![terraform apply](./images/t-nat-gateway.JPG)
