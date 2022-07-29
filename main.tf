@@ -93,3 +93,42 @@ resource "aws_nat_gateway" "ngw" {
   # on the Internet Gateway for the VPC.
   
 }
+
+
+ # create private route table
+resource "aws_route_table" "private-rtb" {
+  vpc_id = aws_vpc.main.id
+
+  tags = merge(
+    var.tags,
+    {
+      Name = format("%s-Private-Route-Table", var.name)
+    },
+  )
+}
+
+# create route for the private route table and attach the nat gateway
+
+resource "aws_route" "private_rtb_route" {
+    route_table_id = aws_route_table.private-rtb.id
+    destination_cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.ngw.id
+  }
+
+# associate all private subnets to the private route table
+
+resource "aws_route_table_association" "private_subnet_association" {
+    
+    count = count(aws_subnet.private[*].id)
+    subnet_id = element(aws_subnet.private[*].id, count.index)
+    route_table_id = aws_route.private_rtb_route.id
+  }
+
+
+
+
+  resource "aws_route_table" "rtb-public" {
+  vpc_id = aws_vpc.main.id
+
+  
+  }
