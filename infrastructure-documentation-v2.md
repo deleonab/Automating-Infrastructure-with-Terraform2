@@ -202,6 +202,20 @@ resource "aws_route_table_association" "public-subnets-assoc" {
 }
 ```
 
+### I rannterraform plan and terraform apply which provisioned the following resources to AWS in a multi-az set up:
 
+– Our main vpc
+– 2 Public subnets
+– 4 Private subnets
+– 1 Internet Gateway
+– 1 NAT Gateway
+– 1 EIP
+– 2 Route tables
 
+### To clean up the code, we did some refactoring and moved some of the code into their own files
+
+### I created the following files:
+internet-gw.tf  - The internet gateway 
+nat-gw.tf - The nat gateway
+routes.tf   - The private and public route tables, routes and subnet associations
 
