@@ -253,3 +253,5 @@ terraform apply
 ```
 touch certificate.tf
 ```
+### I will need to create the certificaate, a public zone and validate the certificate with the DNS method
+
