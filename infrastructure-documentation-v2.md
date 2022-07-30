@@ -247,3 +247,9 @@ terraform apply
 ### I would need to create the certificate manager before the ALB
 ### I would need to create the Application Load balancer before the autoscalling groups
 
+### Lets create the certificate (TLS/SSL)  
+### I created a new file certificate.tf
+
+```
+touch certificate.tf
+```
