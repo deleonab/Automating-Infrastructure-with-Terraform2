@@ -244,4 +244,6 @@ terraform apply
 
 
 #### Next, I will be creating the Application Load Balancer and the Auto scaling Groups
+### I would need to create the certificate manager before the ALB
+### I would need to create the Application Load balancer before the autoscalling groups
 
