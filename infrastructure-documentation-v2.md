@@ -340,6 +340,17 @@ resource "aws_route53_record" "wordpress" {
 }
 ```
 
+#########################
+
+Let's create the security groups in a file named sg.tf
+
+##########################
+
+```touch sg.tf
+```
+
+
+
 
 
 ### The next stage is to create the internet facing external application load balancer in a file called albexternal.tf
