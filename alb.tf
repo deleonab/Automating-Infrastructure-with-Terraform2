@@ -59,7 +59,7 @@ resource "aws_lb_listener" "nginx-listner" {
 }
 
 
-Next step is to create an Internal (Internal) Application Load Balancer (ALB)
+# Next step is to create an Internal (Internal) Application Load Balancer (ALB)
 
 
 # ----------------------------
