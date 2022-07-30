@@ -21,7 +21,7 @@ resource "aws_autoscaling_notification" "dele_notifications" {
 }
 
 
-launch template for bastion
+# launch template for bastion
 resource "random_shuffle" "az_list" {
   input        = data.aws_availability_zones.available.names
 }
@@ -154,9 +154,9 @@ resource "aws_autoscaling_attachment" "asg_attachment_nginx" {
   autoscaling_group_name = aws_autoscaling_group.nginx-asg.id
   alb_target_group_arn   = aws_lb_target_group.nginx-tgt.arn
 }
-Autoscaling for wordpres and toolibng will be created in a seperate file
+#Autoscaling for wordpres and toolibng will be created in a seperate file
 
-Create asg-wordpress-tooling.tf and paste the following code
+#Create asg-wordpress-tooling.tf and paste the following code
 
 # launch template for wordpress
 
