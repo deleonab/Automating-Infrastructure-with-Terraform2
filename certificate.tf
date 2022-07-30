@@ -1,5 +1,8 @@
+
+# Create the certificate using a wildcard for all the domains created in workachoo.com
+
 resource "aws_acm_certificate" "workachoo" {
-  domain_name       = "workachoo.com"
+  domain_name       = "*.workachoo.com"
   validation_method = "DNS"
 
   tags = {
@@ -10,6 +13,8 @@ resource "aws_acm_certificate" "workachoo" {
     create_before_destroy = true
   }
 }
+
+
 
 resource "aws_route53_zone" "workachoo" {
   name = "workachoo.com"
