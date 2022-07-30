@@ -255,9 +255,9 @@ touch certificate.tf
 ```
 ### I will need to create the certificate, a public zone and validate the certificate with the DNS method
 
-```
-# Create the certificate using a wildcard for all the domains created in workachoo.com
+### Create the certificate using a wildcard for all the domains created in workachoo.com
 
+```
 resource "aws_acm_certificate" "workachoo" {
   domain_name       = "*.workachoo.com"
   validation_method = "DNS"
@@ -271,15 +271,18 @@ resource "aws_acm_certificate" "workachoo" {
   }
 }
 
-# calling the hosted zone
+```
+### calling the hosted zone
 
+```
 resource "aws_route53_zone" "workachoo" {
   name = "workachoo.com"
   private_zone = false
 }
+```
 
-
-# selecting validation method
+### selecting validation method
+```
 resource "aws_route53_record" "workachoo" {
   for_each = {
     for dvo in aws_acm_certificate.workachoo.domain_validation_options : dvo.domain_name => {
@@ -296,16 +299,19 @@ resource "aws_route53_record" "workachoo" {
   type            = each.value.type
   zone_id         = data.aws_route53_zone.workachoo.zone_id
 }
+```
 
 # validate the certificate through DNS method
+```
 resource "aws_acm_certificate_validation" "workachoo" {
   certificate_arn         = aws_acm_certificate.workachoo.arn
   validation_record_fqdns = [for record in aws_route53_record.workachoo : record.fqdn]
 }
-
+```
 ### our A record names will be tooling.workachoo.com and wordpress.workachoo.com
 
-# create records for tooling
+### create records for tooling
+```
 resource "aws_route53_record" "tooling" {
   zone_id = data.aws_route53_zone.workachoo.zone_id
   name    = "tooling.workachoo.com"
@@ -317,8 +323,10 @@ resource "aws_route53_record" "tooling" {
     evaluate_target_health = true
   }
 }
+```
 
-# create records for wordpress
+### create records for wordpress
+```
 resource "aws_route53_record" "wordpress" {
   zone_id = data.aws_route53_zone.workachoo.zone_id
   name    = "wordpress.workachoo.com"
@@ -340,7 +348,7 @@ touch alb.tf
 ```
 
 
-# We need to create an ALB to balance the traffic between the Instances:
+### We need to create an ALB to balance the traffic between the Instances:
 
 ```
 resource "aws_lb" "ext-alb" {
@@ -365,11 +373,12 @@ resource "aws_lb" "ext-alb" {
   ip_address_type    = "ipv4"
   load_balancer_type = "application"
 }
+```
+### We need to inform the ALB of where where route the traffic.  We need to create a Target Group for our load balancer
+### Create the target group
+### The targets are our nginx reverse proxy servers
 
-# We need to inform the ALB of where where route the traffic.  We need to create a Target Group for our load balancer
-# Create the target group
-# The targets are our nginx reverse proxy servers
-
+```
 resource "aws_lb_target_group" "nginx-tgt" {
   health_check {
     interval            = 10
@@ -385,10 +394,11 @@ resource "aws_lb_target_group" "nginx-tgt" {
   target_type = "instance"
   vpc_id      = aws_vpc.main.id
 }
+```
 
+### Next, we will create a Listner for the target group aws_lb_target_group.nginx-tgt
 
-# Next, we will create a Listner for the target group aws_lb_target_group.nginx-tgt
-
+```
 resource "aws_lb_listener" "nginx-listner" {
   load_balancer_arn = aws_lb.ext-alb.arn
   port              = 443
@@ -401,14 +411,15 @@ resource "aws_lb_listener" "nginx-listner" {
   }
 }
 
+```
+### Next step is to create an Internal (Internal) Application Load Balancer (ALB)
 
-# Next step is to create an Internal (Internal) Application Load Balancer (ALB)
 
+### ----------------------------
+### Internal Load Balancers for webservers
+### ---------------------------------
 
-# ----------------------------
-#Internal Load Balancers for webservers
-#---------------------------------
-
+```
 resource "aws_lb" "ialb" {
   name     = "ialb"
   internal = true
@@ -431,10 +442,12 @@ resource "aws_lb" "ialb" {
   ip_address_type    = "ipv4"
   load_balancer_type = "application"
 }
-# To inform our ALB to where route the traffic we need to create a Target Group to point to its targets:
+```
+### To inform our ALB to where route the traffic we need to create a Target Group to point to its targets:
 
-# --- target group  for wordpress -------
+### --- target group  for wordpress -------
 
+```
 resource "aws_lb_target_group" "wordpress-tgt" {
   health_check {
     interval            = 10
@@ -451,9 +464,10 @@ resource "aws_lb_target_group" "wordpress-tgt" {
   target_type = "instance"
   vpc_id      = aws_vpc.main.id
 }
+```
+### --- target group for tooling -------
 
-# --- target group for tooling -------
-
+```
 resource "aws_lb_target_group" "tooling-tgt" {
   health_check {
     interval            = 10
@@ -470,11 +484,13 @@ resource "aws_lb_target_group" "tooling-tgt" {
   target_type = "instance"
   vpc_id      = aws_vpc.main.id
 }
-# Then we will need to create a Listener for this target Group
+```
+## Then we will need to create a Listener for this target Group
 
-# For this aspect a single listener was created for the wordpress which is default,
-# A rule was created to route traffic to tooling when the host header changes
+## For this aspect a single listener was created for the wordpress which is default,
+## A rule was created to route traffic to tooling when the host header changes
 
+```
 resource "aws_lb_listener" "web-listener" {
   load_balancer_arn = aws_lb.ialb.arn
   port              = 443
@@ -487,9 +503,10 @@ resource "aws_lb_listener" "web-listener" {
   }
 }
 
+```
+### listener rule for tooling target
 
-# listener rule for tooling target
-
+```
 resource "aws_lb_listener_rule" "tooling-listener" {
   listener_arn = aws_lb_listener.web-listener.arn
   priority     = 99
