@@ -241,3 +241,7 @@ terraform apply
 
 ### Nat Gateway
 ![terraform apply](./images/t-nat-gateway.JPG)
+
+
+#### Next, I will be creating the Application Load Balancer and the Auto scaling Groups
+
