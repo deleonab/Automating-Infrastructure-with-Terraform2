@@ -16,7 +16,7 @@ resource "aws_acm_certificate" "workachoo" {
 
 # calling the hosted zone
 
-resource "aws_route53_zone" "workachoo" {
+data "aws_route53_zone" "workachoo" {
   name = "workachoo.com"
   private_zone = false
 }
