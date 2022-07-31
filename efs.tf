@@ -19,3 +19,14 @@ EOF
 }
 
 # Might need to change user terraform to another user
+
+# create key alias
+resource "aws_kms_alias" "alias" {
+  name          = "alias/kms"
+  target_key_id = aws_kms_key.ACS-kms.key_id
+}
+
+
+
+
+
