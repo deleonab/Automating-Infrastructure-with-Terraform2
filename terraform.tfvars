@@ -26,3 +26,9 @@ environment = "dev"
 
 keypair = "devops"
 ami = "ami-06640050dc3f556bb"
+
+account_no = "1854-3993-3271"
+
+db-username = "value"
+
+db-password = "devopspbl"
