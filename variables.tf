@@ -54,3 +54,10 @@ variable "environment"{
 
   type=string
 }
+
+variable "ami" {
+
+
+  type = "string"
+  description = "EC2 AMI for launch template and ASG"
+}
