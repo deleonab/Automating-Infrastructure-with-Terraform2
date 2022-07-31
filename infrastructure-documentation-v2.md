@@ -302,7 +302,7 @@ resource "aws_route53_record" "workachoo" {
 }
 ```
 
-# validate the certificate through DNS method
+### validate the certificate through DNS method
 ```
 resource "aws_acm_certificate_validation" "workachoo" {
   certificate_arn         = aws_acm_certificate.workachoo.arn
@@ -343,7 +343,7 @@ resource "aws_route53_record" "wordpress" {
 
 #########################
 
-Let's create the security groups in a file named sg.tf
+### Let's create the security groups in a file named sg.tf
 
 ##########################
 
@@ -351,8 +351,130 @@ Let's create the security groups in a file named sg.tf
 ```
 ####
 
+### security group for external alb, to allow access from anywhere for HTTP and HTTPS traffic
 ```
-# security group for ialb, to have acces only from nginx reverser proxy server
+resource "aws_security_group" "ext-alb-sg" {
+  name        = "ext-alb-sg"
+  vpc_id      = aws_vpc.main.id
+  description = "Allow TLS inbound traffic"
+
+  
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+ tags = merge(
+    var.tags,
+    {
+      Name = "ext-alb-sg"
+    },
+  )
+
+}
+
+
+resource "aws_security_group_rule" "inbound-alb-http" {
+  type                     = "ingress"
+  from_port                = 80
+  to_port                  = 80
+  protocol                 = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id        = aws_security_group.ext-alb-sg.id
+}
+
+resource "aws_security_group_rule" "inbound-alb-https" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id        = aws_security_group.ext-alb-sg.id
+}
+
+
+
+
+
+
+
+
+# security group for bastion, to allow access into the bastion host from my device IP
+resource "aws_security_group" "bastion_sg" {
+  name        = "bastion_sg"
+  vpc_id = aws_vpc.main.id
+  description = "Allow incoming SSH connections."
+
+  ingress {
+    description = "SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+   tags = merge(
+    var.tags,
+    {
+      Name = "Bastion-SG"
+    },
+  )
+}
+```
+
+#### security group for nginx reverse proxy, to allow access only from the external load balancer and bastion instance
+```
+resource "aws_security_group" "nginx-sg" {
+  name   = "nginx-sg"
+  vpc_id = aws_vpc.main.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+   tags = merge(
+    var.tags,
+    {
+      Name = "nginx-SG"
+    },
+  )
+}
+
+resource "aws_security_group_rule" "inbound-nginx-http" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.ext-alb-sg.id
+  security_group_id        = aws_security_group.nginx-sg.id
+}
+
+resource "aws_security_group_rule" "inbound-bastion-ssh" {
+  type                     = "ingress"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.bastion_sg.id
+  security_group_id        = aws_security_group.nginx-sg.id
+}
+```
+
+
+
+### security group for ialb, to have acces only from nginx reverser proxy server
+```
 resource "aws_security_group" "int-alb-sg" {
   name   = "my-alb-sg"
   vpc_id = aws_vpc.main.id
@@ -381,10 +503,12 @@ resource "aws_security_group_rule" "inbound-ialb-https" {
   source_security_group_id = aws_security_group.nginx-sg.id
   security_group_id        = aws_security_group.int-alb-sg.id
 }
+```
+### security group for webservers, to have access only from the internal load balancer and bastion instance
 
-# security group for webservers, to have access only from the internal load balancer and bastion instance
+```
 resource "aws_security_group" "webserver-sg" {
-  name   = "my-asg-sg"
+  name   = "webserver-sg"
   vpc_id = aws_vpc.main.id
 
   egress {
@@ -420,8 +544,8 @@ resource "aws_security_group_rule" "inbound-web-ssh" {
   source_security_group_id = aws_security_group.bastion_sg.id
   security_group_id        = aws_security_group.webserver-sg.id
 }
-
-# security group for datalayer to alow traffic from websever on nfs and mysql port and bastiopn host on mysql port
+```
+### security group for datalayer to alow traffic from websever on nfs and mysql port and bastiopn host on mysql port
 resource "aws_security_group" "datalayer-sg" {
   name   = "datalayer-sg"
   vpc_id = aws_vpc.main.id
@@ -468,9 +592,6 @@ resource "aws_security_group_rule" "inbound-mysql-webserver" {
   security_group_id        = aws_security_group.datalayer-sg.id
 }
 
-```
-
-####
 
 
 
@@ -503,7 +624,7 @@ resource "aws_security_group_rule" "inbound-mysql-webserver" {
 
 
 
-### The next stage is to create the internet facing external application load balancer in a file called albexternal.tf
+## The next stage is to create the internet facing external application load balancer in a file called alb.tf
 ```
 touch alb.tf
 ```
@@ -557,7 +678,7 @@ resource "aws_lb_target_group" "nginx-tgt" {
 }
 ```
 
-### Next, we will create a Listner for the target group aws_lb_target_group.nginx-tgt
+### Next, we will create a Listener for the target group aws_lb_target_group.nginx-tgt
 
 ```
 resource "aws_lb_listener" "nginx-listner" {
