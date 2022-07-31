@@ -63,6 +63,6 @@ variable "ami" {
 }
 
 variable "keypair" {
-
+type = "string"
  description = "Keypair for secure connections"
 }
