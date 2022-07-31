@@ -395,13 +395,9 @@ resource "aws_security_group_rule" "inbound-alb-https" {
 }
 
 
-
-
-
-
-
-
-# security group for bastion, to allow access into the bastion host from my device IP
+```
+### security group for bastion, to allow access into the bastion host from my device IP
+```
 resource "aws_security_group" "bastion_sg" {
   name        = "bastion_sg"
   vpc_id = aws_vpc.main.id
@@ -546,6 +542,8 @@ resource "aws_security_group_rule" "inbound-web-ssh" {
 }
 ```
 ### security group for datalayer to alow traffic from websever on nfs and mysql port and bastiopn host on mysql port
+
+```
 resource "aws_security_group" "datalayer-sg" {
   name   = "datalayer-sg"
   vpc_id = aws_vpc.main.id
@@ -593,36 +591,7 @@ resource "aws_security_group_rule" "inbound-mysql-webserver" {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 ## The next stage is to create the internet facing external application load balancer in a file called alb.tf
 ```
