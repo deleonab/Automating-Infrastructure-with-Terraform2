@@ -58,11 +58,11 @@ variable "environment"{
 variable "ami" {
 
 
-  type = "string"
+  type = string
   description = "EC2 AMI for launch template and ASG"
 }
 
 variable "keypair" {
-type = "string"
+type = string
  description = "Keypair for secure connections"
 }
