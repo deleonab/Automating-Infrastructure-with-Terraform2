@@ -24,4 +24,5 @@ tags = {
 name = "Terraform"
 environment = "dev"
 
+keypair = "devops"
 ami = "ami-06640050dc3f556bb"
