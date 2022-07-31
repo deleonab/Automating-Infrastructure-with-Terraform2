@@ -57,7 +57,6 @@ variable "environment"{
 
 variable "ami" {
 
-
   type = string
   description = "EC2 AMI for launch template and ASG"
 }
@@ -65,4 +64,20 @@ variable "ami" {
 variable "keypair" {
 type = string
  description = "Keypair for secure connections"
+}
+
+
+variable "account_no" {
+  type        = number
+  description = "the account number"
+}
+
+variable "master-username" {
+  type        = string
+  description = "RDS admin username"
+}
+
+variable "master-password" {
+  type        = string
+  description = "RDS master password"
 }
