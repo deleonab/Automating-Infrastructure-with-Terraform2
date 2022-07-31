@@ -29,6 +29,6 @@ ami = "ami-06640050dc3f556bb"
 
 account_no = "185439933271"
 
-db-username = "value"
+db-username = "dele"
 
 db-password = "devopspbl"
