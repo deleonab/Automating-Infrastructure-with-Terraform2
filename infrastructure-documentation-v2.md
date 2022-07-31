@@ -856,3 +856,12 @@ resource "aws_iam_role_policy_attachment" "test-attach" {
         role =  aws_iam_role.ec2_instance_role.name
     }
 ```
+
+### Next,I will create the Auto Scaling Groups (ASG) for nginx, bastion, wordpress and tooling
+
+### This will be in asg-bastion-nginx.tf and asg-webserver.tf
+
+```
+touch asg-bastion-nginx.tf   asg-webserver.tf
+```
+
