@@ -1,5 +1,5 @@
 ### Next was to create the 4 private subnets in our VPC
-# create private subnets
+### Create private subnets
 ```
 resource "aws_subnet" "private" {
   count                   = var.preferred_number_of_private_subnets == null ? length(data.aws_availability_zones.available.names) : var.preferred_number_of_private_subnets
@@ -202,8 +202,8 @@ resource "aws_route_table_association" "public-subnets-assoc" {
 }
 ```
 
-### I rannterraform plan and terraform apply which provisioned the following resources to AWS in a multi-az set up:
-
+### I ran terraform plan and terraform apply which provisioned the following resources to AWS in a multi-az set up:
+```
 – Our main vpc
 – 2 Public subnets
 – 4 Private subnets
@@ -211,6 +211,7 @@ resource "aws_route_table_association" "public-subnets-assoc" {
 – 1 NAT Gateway
 – 1 Elastic IP for the NAT Gateway
 – 2 Route tables for private and public subnets
+```
 
 ### To clean up the code, we did some refactoring and moved some of the code into their own files
 
