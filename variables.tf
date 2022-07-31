@@ -72,12 +72,12 @@ variable "account_no" {
   description = "the account number"
 }
 
-variable "master-username" {
+variable "db-username" {
   type        = string
   description = "RDS admin username"
 }
 
-variable "master-password" {
+variable "db-password" {
   type        = string
   description = "RDS master password"
 }
