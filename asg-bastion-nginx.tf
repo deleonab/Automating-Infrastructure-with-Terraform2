@@ -64,10 +64,10 @@ resource "aws_launch_template" "bastion-launch-template" {
 resource "aws_autoscaling_group" "bastion-asg" {
   name                      = "bastion-asg"
   max_size                  = 2
-  min_size                  = 1
+  min_size                  = 2
   health_check_grace_period = 300
   health_check_type         = "ELB"
-  desired_capacity          = 1
+  desired_capacity          = 2
 
   vpc_zone_identifier = [
     aws_subnet.public[0].id,
@@ -100,7 +100,7 @@ resource "aws_launch_template" "nginx-launch-template" {
   key_name =  var.keypair
 
   placement {
-    availability_zone = "random_shuffle.az_list.result"
+    availability_zone = "${random_shuffle.az_list.result}"
   }
 
   lifecycle {
@@ -126,10 +126,10 @@ resource "aws_launch_template" "nginx-launch-template" {
 resource "aws_autoscaling_group" "nginx-asg" {
   name                      = "nginx-asg"
   max_size                  = 2
-  min_size                  = 1
+  min_size                  = 2
   health_check_grace_period = 300
   health_check_type         = "ELB"
-  desired_capacity          = 1
+  desired_capacity          = 2
 
   vpc_zone_identifier = [
     aws_subnet.public[0].id,
