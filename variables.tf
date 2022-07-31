@@ -61,3 +61,8 @@ variable "ami" {
   type = "string"
   description = "EC2 AMI for launch template and ASG"
 }
+
+variable "keypair" {
+
+ description = "Keypair for secure connections"
+}
