@@ -12,7 +12,7 @@ resource "aws_launch_template" "wordpress-launch-template" {
   key_name = var.keypair
 
   placement {
-    availability_zone = "random_shuffle.az_list.result"
+    availability_zone = "${random_shuffle.az_list.result}"
   }
 
   lifecycle {
@@ -39,10 +39,10 @@ resource "aws_launch_template" "wordpress-launch-template" {
 resource "aws_autoscaling_group" "wordpress-asg" {
   name                      = "wordpress-asg"
   max_size                  = 2
-  min_size                  = 1
+  min_size                  = 2
   health_check_grace_period = 300
   health_check_type         = "ELB"
-  desired_capacity          = 1
+  desired_capacity          = 2
   vpc_zone_identifier = [
 
     aws_subnet.private[0].id,
@@ -79,7 +79,7 @@ resource "aws_launch_template" "tooling-launch-template" {
   key_name = var.keypair
 
   placement {
-    availability_zone = "random_shuffle.az_list.result"
+    availability_zone = "${random_shuffle.az_list.result}"
   }
 
   lifecycle {
@@ -106,10 +106,10 @@ resource "aws_launch_template" "tooling-launch-template" {
 resource "aws_autoscaling_group" "tooling-asg" {
   name                      = "tooling-asg"
   max_size                  = 2
-  min_size                  = 1
+  min_size                  = 2
   health_check_grace_period = 300
   health_check_type         = "ELB"
-  desired_capacity          = 1
+  desired_capacity          = 2
 
   vpc_zone_identifier = [
 

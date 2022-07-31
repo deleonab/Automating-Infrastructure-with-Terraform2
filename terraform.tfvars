@@ -23,3 +23,5 @@ tags = {
 
 name = "Terraform"
 environment = "dev"
+
+ami = "ami-06640050dc3f556bb"
