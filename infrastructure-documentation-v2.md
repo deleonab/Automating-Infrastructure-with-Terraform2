@@ -273,7 +273,7 @@ resource "aws_acm_certificate" "workachoo" {
 }
 
 ```
-### calling the hosted zone
+### Calling the hosted zone
 
 ```
 resource "aws_route53_zone" "workachoo" {
@@ -351,7 +351,7 @@ resource "aws_route53_record" "wordpress" {
 ```
 ####
 
-### security group for external alb, to allow access from anywhere for HTTP and HTTPS traffic
+### Security group for external alb, to allow access from anywhere for HTTP and HTTPS traffic
 ```
 resource "aws_security_group" "ext-alb-sg" {
   name        = "ext-alb-sg"
@@ -396,7 +396,7 @@ resource "aws_security_group_rule" "inbound-alb-https" {
 
 
 ```
-### security group for bastion, to allow access into the bastion host from my device IP
+### Security group for bastion, to allow access into the bastion host from my device IP
 ```
 resource "aws_security_group" "bastion_sg" {
   name        = "bastion_sg"
@@ -427,7 +427,7 @@ resource "aws_security_group" "bastion_sg" {
 }
 ```
 
-#### security group for nginx reverse proxy, to allow access only from the external load balancer and bastion instance
+#### Security group for nginx reverse proxy, to allow access only from the external load balancer and bastion instance
 ```
 resource "aws_security_group" "nginx-sg" {
   name   = "nginx-sg"
@@ -469,7 +469,7 @@ resource "aws_security_group_rule" "inbound-bastion-ssh" {
 
 
 
-### security group for ialb, to have acces only from nginx reverser proxy server
+### Security group for ialb, to have access only from nginx reverser proxy server
 ```
 resource "aws_security_group" "int-alb-sg" {
   name   = "my-alb-sg"
@@ -500,7 +500,7 @@ resource "aws_security_group_rule" "inbound-ialb-https" {
   security_group_id        = aws_security_group.int-alb-sg.id
 }
 ```
-### security group for webservers, to have access only from the internal load balancer and bastion instance
+### Security group for webservers, to have access only from the internal load balancer and bastion instance
 
 ```
 resource "aws_security_group" "webserver-sg" {
@@ -541,7 +541,7 @@ resource "aws_security_group_rule" "inbound-web-ssh" {
   security_group_id        = aws_security_group.webserver-sg.id
 }
 ```
-### security group for datalayer to alow traffic from websever on nfs and mysql port and bastiopn host on mysql port
+### Security group for datalayer to alow traffic from websever on nfs and mysql port and bastion host on mysql port
 
 ```
 resource "aws_security_group" "datalayer-sg" {
@@ -696,7 +696,7 @@ resource "aws_lb" "ialb" {
 ```
 ### To inform our ALB to where route the traffic we need to create a Target Group to point to its targets:
 
-### --- target group  for wordpress -------
+### --- Target group  for wordpress -------
 
 ```
 resource "aws_lb_target_group" "wordpress-tgt" {
@@ -716,7 +716,7 @@ resource "aws_lb_target_group" "wordpress-tgt" {
   vpc_id      = aws_vpc.main.id
 }
 ```
-### --- target group for tooling -------
+### --- Target group for tooling -------
 
 ```
 resource "aws_lb_target_group" "tooling-tgt" {
@@ -736,10 +736,10 @@ resource "aws_lb_target_group" "tooling-tgt" {
   vpc_id      = aws_vpc.main.id
 }
 ```
-## Then we will need to create a Listener for this target Group
+### Then we will need to create a Listener for this target Group
 
-## For this aspect a single listener was created for the wordpress which is default,
-## A rule was created to route traffic to tooling when the host header changes
+### For this aspect a single listener was created for the wordpress which is default,
+### A rule was created to route traffic to tooling when the host header changes
 
 ```
 resource "aws_lb_listener" "web-listener" {
@@ -775,8 +775,14 @@ resource "aws_lb_listener_rule" "tooling-listener" {
 }
 ```
 
-###   next we need an IAM Role for our EC2 instances to give them access to some specific resources
+### Next we need an IAM Role for our EC2 instances to give them access to some specific resources
 ### Let's create an AssumeRole with an AssumeRole policy. It grants EC2, permissions to assume the role.
+
+### We will create the file roles.tf for this
+
+```
+touch roles.tf
+```
 
 ```
 resource "aws_iam_role" "ec2_instance_role" {
