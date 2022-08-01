@@ -1178,3 +1178,6 @@ resource "aws_autoscaling_attachment" "asg_attachment_tooling" {
 
 
 ### Now what is left is the datalayer which concists of the RDS Database, Elastic File system(EFS) and using KMS keys.
+
+### The first thing is to create a KMS key for the EFS
+
