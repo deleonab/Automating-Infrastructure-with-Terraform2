@@ -1034,8 +1034,8 @@ resource "aws_autoscaling_attachment" "asg_attachment_nginx" {
   ### Inside asg-webserver.tf 
 
 
-  # launch template for wordpress
-
+  ### Launch template for wordpress
+```
 resource "aws_launch_template" "wordpress-launch-template" {
   image_id               = var.ami
   instance_type          = "t2.micro"
@@ -1069,9 +1069,11 @@ resource "aws_launch_template" "wordpress-launch-template" {
 
   user_data = filebase64("${path.module}/wordpress.sh")
 }
+```
 
-# ---- Autoscaling for wordpress application
+### ---- Autoscaling for wordpress application
 
+```
 resource "aws_autoscaling_group" "wordpress-asg" {
   name                      = "wordpress-asg"
   max_size                  = 2
@@ -1095,14 +1097,16 @@ resource "aws_autoscaling_group" "wordpress-asg" {
     propagate_at_launch = true
   }
 }
-
-# attaching autoscaling group of  wordpress application to internal loadbalancer
+```
+### Attaching autoscaling group of  wordpress application to internal loadbalancer
+```
 resource "aws_autoscaling_attachment" "asg_attachment_wordpress" {
   autoscaling_group_name = aws_autoscaling_group.wordpress-asg.id
   lb_target_group_arn   = aws_lb_target_group.wordpress-tgt.arn
 }
-
-# launch template for toooling
+```
+### Launch template for toooling
+```
 resource "aws_launch_template" "tooling-launch-template" {
   image_id               = var.ami
   instance_type          = "t2.micro"
@@ -1136,9 +1140,9 @@ resource "aws_launch_template" "tooling-launch-template" {
 
   user_data = filebase64("${path.module}/tooling.sh")
 }
-
-# ---- Autoscaling for tooling -----
-
+```
+### ---- Autoscaling for tooling -----
+```
 resource "aws_autoscaling_group" "tooling-asg" {
   name                      = "tooling-asg"
   max_size                  = 2
@@ -1164,7 +1168,8 @@ resource "aws_autoscaling_group" "tooling-asg" {
     propagate_at_launch = true
   }
 }
-# attaching autoscaling group of  tooling application to internal loadbalancer
+```
+### attaching autoscaling group of  tooling application to internal loadbalancer
 resource "aws_autoscaling_attachment" "asg_attachment_tooling" {
   autoscaling_group_name = aws_autoscaling_group.tooling-asg.id
   lb_target_group_arn   = aws_lb_target_group.tooling-tgt.arn
