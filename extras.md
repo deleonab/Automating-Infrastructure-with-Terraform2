@@ -31,4 +31,5 @@ CIDR notation compactly indicates the network mask for an address and adds on th
 
 ### Internet Gateway
 
-There’s no additional charge for having an internet gateway in your account.
+Internet Gateway (IGW) is a horizontally scaled, redundant, and highly available VPC component that allows communication between your VPC and the internet.
+Internet Gateway enables resources (like EC2 instances) in public subnets to connect to the internet. Similarly, resources on the internet can initiate a connection to resources in your subnet using the public.
