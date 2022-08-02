@@ -1297,6 +1297,7 @@ resource "aws_efs_access_point" "tooling" {
 
 
 ### This section will create the subnet group for the RDS  instance using the private subnet
+```
 resource "aws_db_subnet_group" "ACS-rds" {
   name       = "acs-rds"
   subnet_ids = [aws_subnet.private[2].id, aws_subnet.private[3].id]
@@ -1308,8 +1309,10 @@ resource "aws_db_subnet_group" "ACS-rds" {
     },
   )
 }
+```
 
 ### create the RDS instance with the subnets group
+```
 resource "aws_db_instance" "ACS-rds" {
   allocated_storage      = 20
   storage_type           = "gp2"
@@ -1326,3 +1329,4 @@ resource "aws_db_instance" "ACS-rds" {
   multi_az               = "true"
 }
 
+```
