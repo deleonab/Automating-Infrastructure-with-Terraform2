@@ -41,3 +41,8 @@ In order to make subnet public, add a route to your subnet’s route table that 
 You can associate exactly one Internet Gateway with a VPC.
 Internet Gateway is not Availability Zone specific.
 There’s no additional charge for having an internet gateway in your account.
+
+### NAT Gateway
+NAT Gateway (NGW) is a managed Network Address Translation (NAT) service.
+NAT Gateway does something similar to Internet Gateway (IGW), but it only works one way: 
+Instances in a private subnet can connect to services outside your VPC but external services cannot initiate a connection with those instances.
