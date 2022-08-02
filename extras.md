@@ -5,3 +5,5 @@
 -- AssumeRole can be used within one's account or for cross-account access. 
 -- The temporary security credentials created by AssumeRole can be used to make API calls to any AWS service with the following exception: 
 -- You cannot call the AWS STS GetFederationToken or GetSessionToken API operations.
+
+### ROLE POLICY
