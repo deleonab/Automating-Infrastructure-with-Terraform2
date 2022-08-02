@@ -36,3 +36,5 @@ Internet Gateway enables resources (like EC2 instances) in public subnets to con
 If a VPC does not have an Internet Gateway, then the resources in the VPC cannot be accessed from the Internet (unless the traffic flows via a Corporate Network and VPN/Direct Connect).
 Internet Gateway supports IPv4 and IPv6 traffic.
 Internet Gateway does not cause availability risks or bandwidth constraints on your network traffic.
+
+In order to make subnet public, add a route to your subnet’s route table that directs internet-bound traffic to the internet gateway.
