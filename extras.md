@@ -7,4 +7,7 @@
 -- You cannot call the AWS STS GetFederationToken or GetSessionToken API operations.
 
 ### ROLE POLICY
-IAM Roles manage who has access to your AWS resources, whereas IAM policies control their permissions. A Role with no Policy attached to it won't have to access any AWS resources.
+IAM Roles manage who has access to your AWS resources, whereas IAM policies control their permissions. 
+A Role with no Policy attached to it won't have to access any AWS resources.
+The difference between IAM roles and policies in AWS is that a role is a type of IAM identity that 
+can be authenticated and authorized to utilize an AWS resource, whereas a policy defines the permissions of the IAM identity.
