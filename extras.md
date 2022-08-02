@@ -48,3 +48,8 @@ NAT Gateway does something similar to Internet Gateway (IGW), but it only works 
 Instances in a private subnet can connect to services outside your VPC but external services cannot initiate a connection with those instances.
 NAT gateways are supported for IPv4 or IPv6 traffic.
 NAT gateway supports the following protocols: TCP, UDP, and ICMP.
+Each NAT gateway is created in a specific Availability Zone and implemented with redundancy in that zone.
+If you have resources in multiple Availability Zones and they share one NAT gateway, and if the NAT gateway’s Availability Zone is down, resources in the other Availability Zones lose internet access.
+To create an Availability Zone-independent architecture, create a NAT gateway in each Availability Zone.
+You can associate exactly one Elastic IP address with a public NAT gateway.
+You are charged for each hour that your NAT gateway is available and each Gigabyte of data that it processes.
