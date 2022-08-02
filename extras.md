@@ -28,3 +28,7 @@ To protect the AWS resources in each subnet, you can use multiple layers of secu
 
 ### CIDR NOTATION
 CIDR notation compactly indicates the network mask for an address and adds on the total number of bits in the entire address using slash notation.
+
+### Internet Gateway
+
+There’s no additional charge for having an internet gateway in your account.
