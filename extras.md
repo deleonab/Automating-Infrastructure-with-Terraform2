@@ -40,3 +40,4 @@ Internet Gateway does not cause availability risks or bandwidth constraints on y
 In order to make subnet public, add a route to your subnet’s route table that directs internet-bound traffic to the internet gateway.
 You can associate exactly one Internet Gateway with a VPC.
 Internet Gateway is not Availability Zone specific.
+There’s no additional charge for having an internet gateway in your account.
