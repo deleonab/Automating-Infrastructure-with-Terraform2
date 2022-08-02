@@ -25,3 +25,6 @@ A subnet is a range of IP addresses in your VPC. You can launch AWS resources in
 that must be connected to the internet, and a private subnet for resources that won't be connected to the internet.
 
 To protect the AWS resources in each subnet, you can use multiple layers of security, including security groups and network access control lists (ACL).
+
+### CIDR NOTATION
+CIDR notation compactly indicates the network mask for an address and adds on the total number of bits in the entire address using slash notation.
