@@ -12,9 +12,16 @@ A Role with no Policy attached to it won't have to access any AWS resources.
 The difference between IAM roles and policies in AWS is that a role is a type of IAM identity that 
 can be authenticated and authorized to utilize an AWS resource, whereas a policy defines the permissions of the IAM identity.
 
+### IP ADDRESS 
 An IP address is a unique address that identifies a device on the internet or a local network. IP stands for "Internet Protocol," 
 which is the set of rules governing the format of data sent via the internet or local network.
 
 In essence, IP addresses are the identifier that allows information to be sent between devices on a network: they contain location 
 information and make devices accessible for communication. The internet needs a way to differentiate between different computers, routers, 
 and websites. IP addresses provide a way of doing so and form an essential part of how the internet works.
+
+### SUBNETS
+A subnet is a range of IP addresses in your VPC. You can launch AWS resources into a specified subnet. Use a public subnet for resources 
+that must be connected to the internet, and a private subnet for resources that won't be connected to the internet.
+
+To protect the AWS resources in each subnet, you can use multiple layers of security, including security groups and network access control lists (ACL).
