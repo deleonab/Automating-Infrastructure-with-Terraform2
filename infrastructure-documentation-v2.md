@@ -1330,3 +1330,15 @@ resource "aws_db_instance" "ACS-rds" {
 }
 
 ```
+
+```
+terraform plan
+```
+```
+terraform apply
+```
+
+![Terraform Apply](./images/terraform-success.JPG)
+
+## 76 Resources added successfully
+# End of Project
