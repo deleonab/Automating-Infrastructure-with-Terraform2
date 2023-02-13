@@ -1,4 +1,4 @@
-The objective of this project is to automate infrastructure with IAC using Terraform
+The objective of this project is to create and provision a 3 tier, Multi AZ architecture with Infrastructure as Code. We shall use Terraform to achieve this.
 Please note: In this project we shall use resources mostly. In the next version we shall refactor our code into modules..
 
 ![Image of infrastructure](./images/tooling_project_16.png)
@@ -21,6 +21,8 @@ Please note: In this project we shall use resources mostly. In the next version 
  14. Elastic File System EFS
  15. Web Servers
  16. RDS Database
+ 17. S3 bucket to host our state files
+ 18. Dynamo DB for state locking
 ---
 ![Image of infrastructure](./images/tooling_project_16.png)
 
