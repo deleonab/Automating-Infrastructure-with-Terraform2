@@ -1,4 +1,5 @@
 The objective of this project is to automate infrastructure with IAC using Terraform
+Please note: In this project we shall use resources mostly. In the next version we shall refactor our code into modules..
 
 ![Image of infrastructure](./images/tooling_project_16.png)
 
