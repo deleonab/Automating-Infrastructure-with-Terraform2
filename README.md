@@ -26,12 +26,14 @@ Please note: In this project we shall use resources mostly. In the next version 
 ---
 ![Image of infrastructure](./images/tooling_project_16.png)
 
-### AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM
+ AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM
 ---
 
 
-### installed the following extentions for Terraform in VSCode
+I installed the following extentions for Terraform in VSCode
+
 -- Terraform Configuration
+
 --Hashicorp Syntax Highlighting
 
 
@@ -354,7 +356,7 @@ tags = merge(
   )
   ```
 
- ### We shall use the format function to append the default tags to our resource name
+  We shall use the format function to append the default tags to our resource name
   ```
   Name = format("%s-PrivateSubnet-%s",var.name,count.index)
   ```
@@ -431,7 +433,7 @@ resource "aws_nat_gateway" "ngw" {
 
  Next, I created the route tables, route and subnet associations
 
-### create private route table
+create private route table
 ```
 resource "aws_route_table" "private-rtb" {
   vpc_id = aws_vpc.main.id
@@ -540,18 +542,18 @@ terraform apply
 
 
  Next, I will be creating the Application Load Balancer and the Auto scaling Groups, target groups and listeners
-### I would need to create the certificate manager before the ALB
-### I would need to create the Application Load balancer before the autoscalling groups
+ I would need to create the certificate manager before the ALB
+ I would need to create the Application Load balancer before the autoscalling groups
 
-### Lets create the certificate (TLS/SSL)  
-### I created a new file certificate.tf
+ Lets create the certificate (TLS/SSL)  
+ I created a new file certificate.tf
 
 ```
 touch certificate.tf
 ```
-### I will need to create the certificate, a public zone and validate the certificate with the DNS method
+ I will need to create the certificate, a public zone and validate the certificate with the DNS method
 
-### Create the certificate using a wildcard for all the domains created in workachoo.com
+ Create the certificate using a wildcard for all the domains created in workachoo.com
 
 ```
 resource "aws_acm_certificate" "workachoo" {
@@ -568,7 +570,7 @@ resource "aws_acm_certificate" "workachoo" {
 }
 
 ```
-### Calling the hosted zone
+ Calling the hosted zone
 
 ```
 resource "aws_route53_zone" "workachoo" {
@@ -577,7 +579,7 @@ resource "aws_route53_zone" "workachoo" {
 }
 ```
 
-### selecting validation method
+ selecting validation method
 ```
 resource "aws_route53_record" "workachoo" {
   for_each = {
@@ -1050,7 +1052,7 @@ resource "aws_lb_listener" "web-listener" {
 }
 
 ```
-### listener rule for tooling target
+ listener rule for tooling target
 
 ```
 resource "aws_lb_listener_rule" "tooling-listener" {
@@ -1105,8 +1107,8 @@ name = "ec2_instance_role"
 }
 ```
 
-### Create IAM policy for this role
-### This is where we need to define a required policy (i.e., permissions) according to our requirements. For example, allowing an IAM role to perform action describe applied to EC2 instances:
+ Create IAM policy for this role
+ This is where we need to define a required policy (i.e., permissions) according to our requirements. For example, allowing an IAM role to perform action describe applied to EC2 instances:
 
 ```
 resource "aws_iam_policy" "policy" {
@@ -1288,7 +1290,7 @@ resource "aws_launch_template" "nginx-launch-template" {
   user_data = filebase64("${path.module}/nginx.sh")
 }
 
-### ------ Autoscslaling group for reverse proxy nginx ---------
+ ------ Autoscslaling group for reverse proxy nginx ---------
 
 resource "aws_autoscaling_group" "nginx-asg" {
   name                      = "nginx-asg"
@@ -1503,7 +1505,7 @@ EOF
 }
 ```
 
-### Create key alias
+ Create key alias
 ```
 resource "aws_kms_alias" "alias" {
   name          = "alias/kms"
