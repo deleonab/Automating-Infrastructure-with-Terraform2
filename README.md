@@ -1,14 +1,17 @@
 The objective of this project is to automate infrastructure with IAC using Terraform
+
+![Image of infrastructure](./images/tooling_project_16.png)
+
  We shall be creating the following resources in a 3 tier, multi AZ architecture.
  
  1. VPC
  2. 2 Public subnets
  3. 4 Private subnets
  4. Security groups
- 5. A load balancer
+ 5. External and internal load balancers
  6. Target groups
  7. Auto scaling groups
- 8. Launch templates
+ 8. Launch templates for Nginx, Bastion and webservers
  9. IAM Roles and Policies
  10. Bastion host
  11. Nginx Reverse proxy server
