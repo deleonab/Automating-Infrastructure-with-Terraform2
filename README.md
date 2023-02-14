@@ -1,9 +1,10 @@
-The objective of this project is to create and provision a 3 tier, Multi AZ architecture with Infrastructure as Code. We shall use Terraform to achieve this.
-Please note: In this project we shall use resources mostly. In the next version we shall refactor our code into modules..
+ We shall be building a secure and resilient 3 Tier infrastructure inside our own AWS Virtual Private Cloud network for the McQuire Intel company (which uses WordPress CMS for its main business website, and in addition to that, a Tooling Website for their DevOps team. For improved security and performance, a decision has been made to use a reverse proxy technology of which we shall use NGINX to achieve this.
+ 
+Please note: In this project we shall be creating AWS resources. In the next version of this project, we shall refactor our code into modules.
 
 ![Image of infrastructure](./images/tooling_project_16.png)
 
- We shall be building a secure and resilient 3 Tier infrastructure inside our own AWS Virtual Private Cloud network for the McQuire Intel company (which uses WordPress CMS for its main business website, and in addition to that, a Tooling Website for their DevOps team. For improved security and performance, a decision has been made to use a reverse proxy technology of which we shall use NGINX to achieve this.
+
  
 
 It will be made up 3 Tiers: 
