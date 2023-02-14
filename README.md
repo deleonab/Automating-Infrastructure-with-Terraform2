@@ -5,24 +5,21 @@ Please note: In this project we shall use resources mostly. In the next version 
 
  We shall be creating the following resources in a 3 tier, multi AZ architecture.
  
- 1. VPC
- 2. 2 Public subnets
- 3. 4 Private subnets
- 4. Security groups
- 5. External and internal load balancers
- 6. Target groups
- 7. Auto scaling groups
- 8. Launch templates for Nginx, Bastion and webservers
- 9. IAM Roles and Policies
- 10. Bastion host
- 11. Nginx Reverse proxy server
- 12. NAT Gateway
- 13. Internet Gateway
- 14. Elastic File System EFS
- 15. Web Servers
- 16. RDS Database
- 17. S3 bucket to host our state files
- 18. Dynamo DB for state locking
+ Route 53 DNS which will use a custom domain naim and be the entry point to our Load balancer
+VPC to isolate our infrastructure in the cloud
+Private and Public Subnets to group our resources according to need.
+Elastic Load balancer to route traffic to our highly available nginx reverse proxy servers
+Target groups for our Load Balancer
+Auto scaling groups for or Nginx server and web servers
+Launch Templates for our autoscaling groups
+Security groups associated with every resource and configured to only allow certain type of traffic from certain ports or IP's
+Bastion host in a public subnet for SSH access into other servers.
+Internet gateway to be accessible to the public internet
+Nat Gateway to give internet access to the private subnet
+S3 Object storage will be used to store our terraform state with state locking enabled. Dynamo DB will be used for this.
+We shall use shell scripts to bootstrap our instances and install all the prerequisites such as nginx,mysql,ansible,Apache etc
+ 
+ 
 ---
 ![Image of infrastructure](./images/tooling_project_16.png)
 
