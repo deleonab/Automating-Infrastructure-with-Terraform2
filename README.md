@@ -43,7 +43,6 @@ We shall use shell scripts to bootstrap our instances and install all the prereq
  
  
 ---
-![Image of infrastructure](./images/tooling_project_16.png)
 
  AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM
 ---
@@ -123,7 +122,7 @@ variable "enable_classiclink_dns_support" {
 
 ```
 
-# Declare a variable to store the desired number of public subnets, and set the default value
+ Declare a variable to store the desired number of public subnets, and set the default value
 ```
 variable "preferred_number_of_public_subnets" {
   default = 2
@@ -186,7 +185,8 @@ terraform plan
 
 
 To keep the code clean and efficient, I refactored the code by doing the following
-I Create a new file and name variables.tf and copied all the variable declarations into it from main.tf.
+
+I created a new file called variables.tf and copied all the variable declarations into it from main.tf.
 I created another file named terraform.tfvars and set values for each of the variables.
 
  main.tf
@@ -413,7 +413,7 @@ resource "aws_internet_gateway" "igw" {
 }
 ```
 
- ### Then the elastic IP for the NAT Gateway
+ Then I created the elastic IP for the NAT Gateway
 
 ```
 resource "aws_eip" "nat_eip" {
