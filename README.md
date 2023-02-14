@@ -26,18 +26,19 @@ For our entire infrastructure, we will be creating, implementing Infrastructure 
  
  We shall be creating the following resources in a 3 tier, multi AZ architecture.
  
- Route 53 DNS which will use a custom domain naim and be the entry point to our Load balancer
-VPC to isolate our infrastructure in the cloud
-Private and Public Subnets to group our resources according to need.
-Elastic Load balancer to route traffic to our highly available nginx reverse proxy servers
-Target groups for our Load Balancer
-Auto scaling groups for or Nginx server and web servers
-Launch Templates for our autoscaling groups
-Security groups associated with every resource and configured to only allow certain type of traffic from certain ports or IP's
-Bastion host in a public subnet for SSH access into other servers.
-Internet gateway to be accessible to the public internet
-Nat Gateway to give internet access to the private subnet
-S3 Object storage will be used to store our terraform state with state locking enabled. Dynamo DB will be used for this.
+1. Route 53 DNS which will use a custom domain naim and be the entry point to our Load balancer
+2. VPC to isolate our infrastructure in the cloud
+3. Private and Public Subnets to group our resources according to need.
+4. Elastic Load balancer to route traffic to our highly available nginx reverse proxy servers
+5. Target groups for our Load Balancer
+6. Auto scaling groups for our Nginx server and web servers
+7. Launch Templates for our autoscaling groups
+8. Security groups associated with every resource and configured to only allow certain type of traffic from certain ports or IP's
+9. Bastion host in a public subnet for SSH access into other servers.
+10. Internet gateway to be accessible to the public internet
+11. Nat Gateway to give internet access to the private subnet
+12. S3 Object storage will be used to store our terraform state with state locking enabled. Dynamo DB will be used for this.
+
 We shall use shell scripts to bootstrap our instances and install all the prerequisites such as nginx,mysql,ansible,Apache etc
  
  
