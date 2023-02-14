@@ -4,6 +4,8 @@ For improved security and performance, a decision has been made to use a reverse
  
 Please note: In this project we shall be creating AWS resources. In the next version of this project, we shall refactor our code into modules.
 
+[Jump to the modularised version here](https://github.com/deleonab/terraform-3-tier-multiAZ)
+
 ![Image of infrastructure](./images/tooling_project_16.png)
 
 
